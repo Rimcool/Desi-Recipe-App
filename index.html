@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pakistani Recipe Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg1:#031220; --bg2:#0b3b3b; --accent:#ff66cc; --accent2:#00e6a8; --panel:#ffd166;
+        }
+        html,body{height:100%;margin:0;padding:0;font-family: Montserrat, 'Segoe UI', sans-serif;}
+        body {
+            background: radial-gradient(ellipse at top left,var(--bg1) 0%, #023 40%, var(--bg2) 100%);
+            color: #fff; display:flex; align-items:center; justify-content:center; text-align:center;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 30px);
+        }
+        .container{width:92%;max-width:900px;padding:30px;}
+        .retro-header{
+            font-family: 'Press Start 2P', monospace; font-size:28px; color:var(--accent);
+            text-shadow: 0 0 8px #ff66cc, 4px 4px 0 rgba(0,0,0,0.4); margin-bottom:18px;
+        }
+        /* Neon glow animation */
+        .neon{ animation: neon-flicker 2.8s infinite; }
+        @keyframes neon-flicker{
+            0%,18%,20%,50%,60%,100%{text-shadow:0 0 6px #ff66cc,0 0 12px rgba(255,102,204,0.6),4px 4px 0 rgba(0,0,0,0.4)}
+            19%,21%,59%{text-shadow:0 0 2px #ff66cc,0 0 4px rgba(255,102,204,0.2)}
+        }
+        .sub{font-weight:700;color:var(--accent2);margin-bottom:18px}
+        .box{
+            background: linear-gradient(180deg,#fff 0%, #ffe8b5 100%); color:#012; padding:24px; border:6px solid #111;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.45), -6px -6px 0 rgba(255,255,255,0.03);
+            border-radius:8px; position:relative;
+        }
+        /* Pixel-art textured overlay using small repeating gradients (no external image needed) */
+        .container:after{
+            content:''; position:absolute; inset:0; pointer-events:none; mix-blend-mode:overlay; opacity:0.08;
+            background-image:
+                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size:8px 8px,8px 8px; transform:scale(1.2);
+        }
+        .box:before{
+            content:''; position:absolute; inset:6px; border:2px dashed rgba(0,0,0,0.06); pointer-events:none; border-radius:4px;
+        }
+        .controls{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+        input#userInput{padding:14px 12px; width:60%; min-width:200px; border:3px solid #111; font-size:14px; border-radius:6px;}
+        button{cursor:pointer;border:3px solid #111;padding:12px 16px;background:linear-gradient(180deg,var(--panel),#ffbf69);font-weight:700}
+        .btn-retro{background:linear-gradient(180deg,#ffd54a,#ffbf69);color:#111}
+        .btn-view{background:linear-gradient(180deg,#8fd3ff,#69b9ff);color:#012}
+        .btn-pdf{background:linear-gradient(180deg,#ff8fb1,#ff66cc);color:#111}
+        .recipe{background:linear-gradient(180deg,#fff,#f0f0f0);padding:12px;border:2px solid #ddd;margin-top:10px;border-radius:6px}
+        .recipe strong{display:block;font-family:'Press Start 2P',monospace;font-size:12px;color:#012;margin-bottom:6px}
+        .recipe small{color:#444}
+        .recipe-detail{background:#fff;padding:14px;border-radius:6px;color:#111}
+        .recipe-detail h2{font-family:'Press Start 2P';color:var(--accent);font-size:18px}
+        .recipe-detail ul, .recipe-detail ol{margin-left:18px;color:#222}
+        footer{margin-top:14px;color:#ccc;font-size:12px}
+
+        @media (max-width:520px){
+            input#userInput{width:100%}
+            .controls{flex-direction:column}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="retro-header neon">PK Desi Ingredient Game</div>
+        <div class="sub">Find Pakistani recipes from what you have at home — 90s arcade vibes</div>
+
+        <div class="box">
+            <div class="controls">
+                <input type="text" id="userInput" placeholder="e.g. Chicken, Ginger, Onion">
+                <button class="btn-retro" onclick="checkKitchen()">What can I cook?</button>
+                <button class="btn-pdf" onclick="saveAsPDF()">Save Screen as PDF</button>
+            </div>
+
+            <div id="display"></div>
+        </div>
+
+        <footer>Retro mode: 1990s • Made with ❤️</footer>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
